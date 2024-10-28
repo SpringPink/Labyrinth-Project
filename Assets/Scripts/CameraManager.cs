@@ -27,8 +27,8 @@ public class CameraManager : MonoBehaviour
 
     public void Update()
     {
-        _cameraRotation.Yaw += _input.x * mouseSensitivity.horizontal * Time.deltaTime;
-        _cameraRotation.Pitch += _input.y * mouseSensitivity.vertical * Time.deltaTime;
+        _cameraRotation.Yaw += _input.x * mouseSensitivity.horizontal * BoolToInt(mouseSensitivity.invertHorizontal) * Time.deltaTime;
+        _cameraRotation.Pitch += _input.y * mouseSensitivity.vertical * BoolToInt(mouseSensitivity.invertVertical) * Time.deltaTime;
         _cameraRotation.Pitch = Mathf.Clamp(_cameraRotation.Pitch, _cameraAngle.min, _cameraAngle.max);
     }
 
@@ -37,6 +37,9 @@ public class CameraManager : MonoBehaviour
         transform.eulerAngles = new Vector3(_cameraRotation.Pitch, _cameraRotation.Yaw, 0.0f);
         transform.position = target.position - transform.forward * _distanceToPlayer;
     }
+
+    private static int BoolToInt(bool b) => b ? 1 : -1;
+
 }
 
 
@@ -45,6 +48,8 @@ public struct MouseSensitivity
 {
     public float horizontal;
     public float vertical;
+    public bool invertVertical;
+    public bool invertHorizontal;
 }
 
 public struct CameraRotation
