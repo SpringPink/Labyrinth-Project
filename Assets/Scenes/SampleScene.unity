@@ -262,7 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodePrefab: {fileID: 760574240467156105, guid: b23adf16ab528f842ba7d43488ee0451, type: 3}
   mazeSize: {x: 5, y: 5}
-  nodeSize: 5
+  nodeSize: 10
   Player: {fileID: 9203840609738111768, guid: 5068ce03523fe20479cd317229f10938, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
