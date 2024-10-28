@@ -8,6 +8,7 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private MazeNode nodePrefab;
     [SerializeField] private Vector2Int mazeSize;
     [SerializeField] private float nodeSize;
+    [SerializeField] private GameObject Player;
 
     private void Start()
     {
@@ -36,8 +37,12 @@ public class MazeGenerator : MonoBehaviour
         List<MazeNode> completedNodes = new List<MazeNode>();
 
         // Starting Nodes
-        currentPath.Add(nodes[Random.Range(0, nodes.Count)]);
-        currentPath[0].SetState(NodeState.Current);
+        MazeNode startingNode = nodes[Random.Range(0, nodes.Count)];
+        currentPath.Add(startingNode);
+        startingNode.SetState(NodeState.Current);
+
+        // Instantiate Player at first node location
+        Instantiate(Player, startingNode.transform.position, Quaternion.identity);
 
         while (completedNodes.Count < nodes.Count)
         {
