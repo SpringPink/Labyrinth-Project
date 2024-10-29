@@ -39,7 +39,6 @@ public class MazeGenerator : MonoBehaviour
         // Starting Nodes
         MazeNode startingNode = nodes[Random.Range(0, nodes.Count)];
         currentPath.Add(startingNode);
-        startingNode.SetState(NodeState.Current);
 
         // Instantiate Player at first node location
         Instantiate(Player, startingNode.transform.position, Quaternion.identity);
@@ -126,16 +125,12 @@ public class MazeGenerator : MonoBehaviour
                 }
 
                 currentPath.Add(chosenNode);
-                chosenNode.SetState(NodeState.Current);
             }
             else
             {
                 completedNodes.Add(currentPath[currentPath.Count - 1]);
-                currentPath[currentPath.Count - 1].SetState(NodeState.Completed);
                 currentPath.RemoveAt(currentPath.Count - 1);
             }
-
-            yield return new WaitForSeconds(0.05f);
         }
     }
 }
