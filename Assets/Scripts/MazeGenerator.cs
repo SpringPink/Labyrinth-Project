@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MazeGenerator : MonoBehaviour
@@ -9,9 +9,19 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private Vector2Int mazeSize;
     [SerializeField] private float nodeSize;
     [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject Trident;
+    [SerializeField] private GameObject Ennemi;
+    [SerializeField] private float heightOffset = 2.0f;
+    private float distance;
+    private MazeNode spawnNode = null;
+    private int maxAttempts = 100;
+    private int attempts = 0;
+
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         StartCoroutine(GenerateMaze(mazeSize));
     }
 
@@ -42,6 +52,28 @@ public class MazeGenerator : MonoBehaviour
 
         // Instantiate Player at first node location
         Instantiate(Player, startingNode.transform.position, Quaternion.identity);
+
+        // Choose random node dif from start
+        do
+        {
+            spawnNode = nodes[Random.Range(0, nodes.Count)];
+
+            // Calcul Start Node to Dif Node
+            distance = Vector3.Distance(startingNode.transform.position, spawnNode.transform.position);
+
+            attempts++;
+            if (attempts > maxAttempts)
+            {
+                Debug.LogWarning("Aléatoire.");
+                break;
+            }
+
+        } while (spawnNode == startingNode || distance < 7 * nodeSize);
+
+        // Positionnement du Trident
+        Vector3 spawnPosition = spawnNode.transform.position + new Vector3(0, heightOffset, 0);
+        Instantiate(Trident, spawnPosition, Quaternion.identity);
+        Instantiate(Ennemi, spawnNode.transform.position, Quaternion.identity);
 
         while (completedNodes.Count < nodes.Count)
         {

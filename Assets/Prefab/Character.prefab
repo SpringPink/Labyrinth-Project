@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 749898538432663142}
   - component: {fileID: 8615279250038522594}
   - component: {fileID: 4574568673472169660}
+  - component: {fileID: 1868935017518437645}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -208,7 +209,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -319,3 +320,15 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1868935017518437645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9203840609738111768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf2781222a8e6e146bd330a8aa7c6546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
